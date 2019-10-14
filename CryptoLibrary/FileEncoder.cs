@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Security.Cryptography;
 using System;
+using System.Text;
 
 namespace CryptoLibrary
 {
@@ -59,6 +60,7 @@ namespace CryptoLibrary
                         }
                     }
                 }
+
                 Console.WriteLine($"File \"{inputFilePath}\" successfully decrypted.");
             }
         }
