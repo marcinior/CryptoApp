@@ -34,7 +34,7 @@ namespace CryptoApp
             textEncoder.DumpBytes("Text to Encrypt in bytes: ", textEncoder.GetBytes(textToEncrypt));
             string fileName = "mb";
 
-            byte[] encryptedBytes = textEncoder.Encrypt(textToEncrypt, fileName);
+            byte[] encryptedBytes = textEncoder.Encrypt(textToEncrypt, fileName, saveToFile: true);
             string encryptedText = textEncoder.GetString(encryptedBytes);
             Console.WriteLine($"Encrypted text:\t{encryptedText}");
             textEncoder.DumpBytes("Encrypted text in bytes:", encryptedBytes);

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoConsoleApp", "CryptoA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoLibrary", "CryptoLibrary\CryptoLibrary.csproj", "{20218E93-BF2D-4AC5-B8D0-7F010939C20D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{BBD854CE-FBAA-4CA4-9251-D8A22DA6C388}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{20218E93-BF2D-4AC5-B8D0-7F010939C20D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20218E93-BF2D-4AC5-B8D0-7F010939C20D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20218E93-BF2D-4AC5-B8D0-7F010939C20D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBD854CE-FBAA-4CA4-9251-D8A22DA6C388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBD854CE-FBAA-4CA4-9251-D8A22DA6C388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBD854CE-FBAA-4CA4-9251-D8A22DA6C388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBD854CE-FBAA-4CA4-9251-D8A22DA6C388}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

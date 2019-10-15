@@ -10,15 +10,25 @@ namespace CryptoLibrary
         private byte[] key;
         private byte[] initializationVector;
 
-        public byte[] Encrypt(string textToEncrypt, string fileName)
+        public byte[] Encrypt(string textToEncrypt, string fileName, byte[] key = null, byte[] iv = null, bool saveToFile = false)
         {
             if (string.IsNullOrEmpty(textToEncrypt))
                 throw new ArgumentNullException(nameof(textToEncrypt));
 
+            if (string.IsNullOrEmpty(fileName) && saveToFile == true)
+                throw new ArgumentNullException(nameof(fileName));
+
             using (Aes aes = Aes.Create())
             {
-                key = aes.Key;
-                initializationVector = aes.IV;
+                if (key != null)
+                    aes.Key = key;
+
+                if (iv != null)
+                    aes.IV = iv;
+
+                this.key = aes.Key;
+                this.initializationVector = aes.IV;
+
                 using (ICryptoTransform encryptor = aes.CreateEncryptor())
                 {
 
@@ -32,7 +42,10 @@ namespace CryptoLibrary
                             }
 
                             byte[] encryptedBytes = encryptMemoryStream.ToArray();
-                            SaveEncryptedTextToFile(GetString(encryptedBytes), fileName);
+
+                            if (saveToFile)
+                                SaveEncryptedTextToFile(GetString(encryptedBytes), fileName);
+
                             return encryptedBytes;
                         }
                     }
@@ -46,7 +59,7 @@ namespace CryptoLibrary
             Console.WriteLine($"Encrypted text saved to file with name \"{fileName}\"");
         }
 
-        public string Decrypt(string encryptedText)
+        public string Decrypt(string encryptedText, byte[] key = null, byte[] iv = null)
         {
             if (string.IsNullOrEmpty(encryptedText))
                 throw new ArgumentNullException(nameof(encryptedText));
@@ -54,8 +67,9 @@ namespace CryptoLibrary
             byte[] encryptedBytes = GetBytes(encryptedText);
             using (Aes aes = Aes.Create())
             {
-                aes.Key = this.key;
-                aes.IV = this.initializationVector;
+                aes.Key = key ?? this.key;
+                aes.IV = iv ?? this.initializationVector;
+
                 using (ICryptoTransform decryptor = aes.CreateDecryptor())
                 {
                     using (MemoryStream decryptMemoryStream = new MemoryStream(encryptedBytes))
@@ -73,9 +87,9 @@ namespace CryptoLibrary
 
         }
 
-        public string GetString(byte[] bytes) => bytes != null ? Encoding.Default.GetString(bytes) : null;
+        public string GetString(byte[] bytes) => bytes != null ? Encoding.Unicode.GetString(bytes) : null;
 
-        public byte[] GetBytes(string text) => string.IsNullOrEmpty(text) ? null : Encoding.Default.GetBytes(text);
+        public byte[] GetBytes(string text) => string.IsNullOrEmpty(text) ? null : Encoding.Unicode.GetBytes(text);
 
         public void DumpBytes(string title, byte[] bytes)
         {
